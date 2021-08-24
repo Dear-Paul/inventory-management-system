@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<!--<header style="background-color: indigo">-->
+<!--    <nav>-->
+<!--        <div class="navbar-brand" style="color: whitesmoke">The Euphoria</div>-->
+<!--        <ul class="navbar-nav">-->
+<!--            <a href="#"> <li class="nav-item dropdown-toggle" style="background-color: darkgrey" >Home</li></a>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--</header>-->
+<div style="display: flex; flex-direction: row; justify-content: space-evenly; align-items: center">
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center-card">
+                <h1 class="text-center">Existing User</h1>
+                <div class="card-body">
+                    <form th:action="@{/tested}" th:object="${login}" method="post">
+
+                        <div class="form-group">
+                            <label>Employee Email</label>
+                            <input type="text"  name="email"
+                                   th:field = "*{email}" class="form-control"  placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" name="password"
+                                   th:field = "*{password}"  class="form-control" placeholder="Input a password"/>
+                        </div>
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Login </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center-card">
+                <h1 class="text-center">New User</h1>
+                <div class="card-body">
+                    <form th:action="@{/register}" th:object ="${user}" method="POST">
+                        <div class="form-group">
+                            <label>FirstName</label>
+                            <input type="text" name="firstName"
+                                   th:field = "*{firstName}"
+                                   class="form-control"
+                                   placeholder="Enter first name"/>
+                        </div>
+<!--                        <input type="hidden" th:field="*{usertype.CUSTOMER.toString()}">-->
+                        <div class="form-group">
+                            <label>LastName</label>
+                            <input type="text" name="lastName"
+                                   th:field = "*{lastName}"
+                                   class="form-control"
+                                   placeholder="Enter last name"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Employee Email</label>
+                            <input type="text"  name="email"
+                                   th:field = "*{email}" class="form-control"  placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" name="password"
+                                   th:field = "*{password}"  class="form-control" placeholder="Input a password"/>
+                        </div>
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Submit </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="container">-->
+<!--    <div class="table-responsive">-->
+<!--        <table class="table">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>First Name</th>-->
+<!--                <th>Last Name</th>-->
+<!--                <th>Email</th>-->
+<!--                <th>Password</th>-->
+<!--                <th>UserType</th>-->
+<!--                <th></th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr>-->
+<!--                <form action="#" th:action="@{/admin/saveUser}" th:object="${user}"-->
+<!--                      method="POST">-->
+<!--                    <td><input type="text" th:field="*{firstName}"-->
+<!--                               placeholder="User First Name" class="form-control mb-4 col-4"></td>-->
+<!--                    <td><input type="text" th:field="*{lastName}"-->
+<!--                               placeholder="User Last Name" class="form-control mb-4 col-4"></td>-->
+<!--                    <td><input type="text" th:field="*{email}"-->
+<!--                               placeholder="User Email" class="form-control mb-4 col-4"></td>-->
+<!--                    <td><input type="text" th:field="*{password}"-->
+<!--                               placeholder="User password" class="form-control mb-4 col-4"></td>-->
+<!--                    <td><input type="text"  th:field="*{userType}"-->
+<!--                               placeholder="Enter UserType" class="form-control mb-4 col-4"></td>-->
+<!--                    <button type="submit" class="btn btn-info col-2"> Save User</button>-->
+<!--                </form>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+<!--</div>-->
+
+</body>
+</html>
