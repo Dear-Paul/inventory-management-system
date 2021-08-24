@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        table, th, td {
+            padding: 10px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+
+
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>-->
+</head>
+<body>
+
+    <h1>Book Details</h1>
+
+    <table>
+        <tr>
+            <td>Book Id</td>
+            <td th:text="*{book.id}"></td>
+        </tr>
+        <tr>
+            <td>Book Name</td>
+            <td th:text="*{book.name}"></td>
+        </tr>
+        <tr>
+            <td>Book Author</td>
+            <td th:text="*{book.author}"></td>
+        </tr>
+        <tr>
+            <td>Book Price</td>
+            <td th:text="*{book.price}"></td>
+        </tr>
+        <tr>
+            <td><img th:src="@{${'/admin/books/display/'+book.id}}" class="img img-responsive img-fluid" height="200" width="200"/></td>
+        </tr>
+    </table>
+    <br><br>
+    <a class="btn btn-small btn-warning" th:href="@{/admin/books/edit/{id}(id=${book.id})}">Edit</a>
+    <a class="btn btn-small btn-danger" th:href="@{/admin/books/delete/{id}(id=${book.id})}">delete</a>
+
+
+
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+
+<!--            <div class="col-sm-4">-->
+<!--                <div class="panel panel-primary">-->
+<!--                    <div class="panel-heading" th:text="${book.name}">  </div>-->
+<!--                    <div class="panel-body">-->
+<!--                        &lt;!&ndash;                        <p>Description : ${product.description}  </p>&ndash;&gt;-->
+<!--                        <p>Price : <span th:text="${book.price}"></span> </p>-->
+<!--                        &lt;!&ndash;                        <p>Seller :  ${product.seller} </p>&ndash;&gt;-->
+<!--                    </div>-->
+<!--                    <div class="panel-footer"> <button type="button" class="btn btn-primary btn-md"-->
+<!--                                                       onClick="location.href=' ' ">Buy</button></div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--        </div>-->
+<!--    </div><br>-->
+</body>
+</html>

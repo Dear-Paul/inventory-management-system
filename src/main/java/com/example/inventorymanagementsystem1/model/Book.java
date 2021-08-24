@@ -16,6 +16,9 @@ public class Book {
 
     private String name;
     private String author;
+    @Column(nullable = false, precision = 10, scale = 2)
     private double price;
+    @Lob
     private byte[] picByte;
+
 }
