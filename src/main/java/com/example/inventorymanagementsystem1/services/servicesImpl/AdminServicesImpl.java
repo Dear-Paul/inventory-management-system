@@ -1,9 +1,13 @@
 package com.example.inventorymanagementsystem1.services.servicesImpl;
 
 import com.example.inventorymanagementsystem1.model.Book;
+<<<<<<< HEAD
 import com.example.inventorymanagementsystem1.model.User;
 import com.example.inventorymanagementsystem1.repositories.BookRepository;
 import com.example.inventorymanagementsystem1.repositories.UserRepository;
+=======
+import com.example.inventorymanagementsystem1.repositories.BookRepository;
+>>>>>>> de63233dd7441924e8d48d60d6eddd4f8ee434cb
 import com.example.inventorymanagementsystem1.services.AdminServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,7 +29,11 @@ import java.util.Optional;
 public class AdminServicesImpl implements AdminServices {
     @Autowired
     private BookRepository bookRepository;
+<<<<<<< HEAD
     private UserRepository repository;
+=======
+
+>>>>>>> de63233dd7441924e8d48d60d6eddd4f8ee434cb
     @Override
     public List<Book> listOfBooks() {
         return bookRepository.findAll();
@@ -58,6 +66,7 @@ public class AdminServicesImpl implements AdminServices {
         Book book = getBookById(id);
         bookRepository.delete(book);
     }
+<<<<<<< HEAD
     @Override
     public List<User> getAllUsers() {
         return repository.findAll();
@@ -74,5 +83,7 @@ public class AdminServicesImpl implements AdminServices {
         repository.delete(user);
     }
 
+=======
+>>>>>>> de63233dd7441924e8d48d60d6eddd4f8ee434cb
 
 }
