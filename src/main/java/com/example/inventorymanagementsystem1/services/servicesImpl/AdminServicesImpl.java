@@ -4,6 +4,9 @@ import com.example.inventorymanagementsystem1.model.Book;
 import com.example.inventorymanagementsystem1.repositories.BookRepository;
 import com.example.inventorymanagementsystem1.services.AdminServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,6 +27,12 @@ public class AdminServicesImpl implements AdminServices {
     @Override
     public List<Book> listOfBooks() {
         return bookRepository.findAll();
+    }
+
+    @Override
+    public Page<Book> findPaginated(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return this.bookRepository.findAll(pageable);
     }
 
     @Override

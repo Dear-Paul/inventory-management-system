@@ -6,12 +6,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -34,11 +36,25 @@ public class AdminController {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
+    @GetMapping("/")
+    public ModelAndView adminHomePage(Model model) {
+//        model.addAttribute("books", adminServices.listOfBooks());
+        return findPaginated(1);
+    }
+
+    @GetMapping("/page/{pageNo}")
+    public ModelAndView findPaginated(@PathVariable(value = "pageNo") int pageNo) {
+        int pageSize = 6;
+        ModelAndView model = new ModelAndView("adminDashboard");
+
+        return CustomerController.getModelAndView(pageNo, pageSize, model, adminServices);
+    }
+
     @GetMapping("/books")
     public String getAllBooks (Model model) {
         List<Book> bookList = adminServices.listOfBooks();
         model.addAttribute("listOfBooks", bookList);
-        return "adminViewAllbooks";
+        return "adminViewAllBooks";
     }
 
     @GetMapping("/books/add")

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <meta charset="UTF-8">
     <title>Pleasant Places - Online Books Store  </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
 <header style="background-color: indigo">
@@ -31,20 +32,22 @@
         </ul>
     </nav>
 </header>
-<h1>Welcome to Books Store</h1>
-<div style="display: flex; flex-direction: row; justify-content: space-evenly; align-items: center">
-<div align="center">Logo, Search
-</div>
+<h1 align="center">Welcome to Books Store</h1>
+<!--<div style="display: flex; flex-direction: row; justify-content: space-evenly; align-items: center">-->
+<!--<div align="center">Logo, Search-->
+<!--</div>-->
 <div align="center">
-    <h3>Main</h3>
-    <h3>In books tab</h3>
     <h1>Books Admin</h1>
     <div class="container">
         <div class="row">
             <div class="col-sm-4" th:each="book : ${listOfBooks}">
                 <div class="panel panel-primary">
                     <div class="panel-heading" th:text="${book.name}">  </div>
+                    <div>
+
+                    </div>
                     <div class="panel-body">
+                        <img th:src="@{${'/admin/books/display/'+book.id}}" class="img img-responsive img-fluid" height="200" width="200">
                         <!--                        <p>Description : ${product.description}  </p>-->
                         <p>Price : <span th:text="${book.price}"></span> </p>
                         <!--                        <p>Seller :  ${product.seller} </p>-->
@@ -60,23 +63,23 @@
     </div><br>
 
 </div>
-<div align="center">
-    Footer
-</div>
-</div>
+<!--<div align="center">-->
+<!--    Footer-->
+<!--</div>-->
+<!--</div>-->
 
-    <footer id="dk-footer" class="dk-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-lg-4">
-                    <div class="dk-footer-box-info">
-                        <a href="index.html" class="footer-logo">
-                            <img src="https://cdn.pixabay.com/photo/2016/11/07/13/04/yoga-1805784_960_720.png" alt="footer_logo" class="img-fluid">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+<!--    <footer id="dk-footer" class="dk-footer">-->
+<!--        <div class="container">-->
+<!--            <div class="row">-->
+<!--                <div class="col-md-12 col-lg-4">-->
+<!--                    <div class="dk-footer-box-info">-->
+<!--                        <a href="index.html" class="footer-logo">-->
+<!--                            <img src="https://cdn.pixabay.com/photo/2016/11/07/13/04/yoga-1805784_960_720.png" alt="footer_logo" class="img-fluid">-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </footer>-->
 </body>
 </html>

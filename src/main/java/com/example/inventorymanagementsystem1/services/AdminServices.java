@@ -1,6 +1,7 @@
 package com.example.inventorymanagementsystem1.services;
 
 import com.example.inventorymanagementsystem1.model.Book;
+import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -11,4 +12,5 @@ public interface AdminServices {
     Book getBookById (long id);
     Book addBookToStore (Book book);
     void removeBookFromStore (long id);
+    Page<Book> findPaginated(int pageNo, int pageSize);
 }
