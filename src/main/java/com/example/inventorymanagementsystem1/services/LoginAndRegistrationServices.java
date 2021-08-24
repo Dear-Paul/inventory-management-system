@@ -4,6 +4,7 @@ import com.example.inventorymanagementsystem1.model.User;
 
 import java.util.Optional;
 
-public interface CustomerServices {
-
+public interface LoginAndRegistrationServices {
+    Optional<User> login(String email, String password);
+    User saveUser(User user);
 }
