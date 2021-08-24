@@ -1,6 +1,10 @@
 package com.example.inventorymanagementsystem1.controllers;
 
 import com.example.inventorymanagementsystem1.model.Book;
+<<<<<<< HEAD
+import com.example.inventorymanagementsystem1.model.User;
+=======
+>>>>>>> de63233dd7441924e8d48d60d6eddd4f8ee434cb
 import com.example.inventorymanagementsystem1.services.AdminServices;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -177,4 +181,23 @@ public class AdminController {
         adminServices.removeBookFromStore(id);
         return "redirect:/admin/books";
     }
+<<<<<<< HEAD
+
+    @GetMapping("/admin/users")
+    public ModelAndView viewAllUsers(Model model){
+        ModelAndView modelAndView = new ModelAndView("userInfo");
+        List<User> listOfUsers = adminServices.getAllUsers();
+        modelAndView.addObject("listOfUsers", listOfUsers);
+        return modelAndView;
+    }
+
+    @GetMapping("/user/delete/{id}" )
+    public String deleteUserFromList(@PathVariable("id") long id) {
+        adminServices.deleteUser(id);
+        return "redirect:/admin/user";
+    }
+
+
+=======
+>>>>>>> de63233dd7441924e8d48d60d6eddd4f8ee434cb
 }
