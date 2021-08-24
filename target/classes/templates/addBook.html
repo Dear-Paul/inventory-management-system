@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+    <h1>Add Book Admin</h1>
+
+    <form method="post" action="#" th:action="@{/admin/books/add}" th:object="${book}" enctype="multipart/form-data">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Book Name" th:field="*{name}" name="name">
+
+      <label for="author">Author</label>
+      <input type="text" class="form-control" id="author" placeholder="author" name="author" th:field="*{author}">
+
+      <label for="author">Price</label>
+      <input type="number" class="form-control" id="price" placeholder="price" name="price" th:field="*{price}">
+
+
+      <br>
+        <label>Book Image:</label>
+      <input type="file" name="image" accept="image/jpeg image/png">
+<!--      <img [src]="imgURL" height="200" width="200" *ngIf="imgURL">-->
+
+      <br>
+      <button type="submit" class="btn btn-success">Save Book</button>
+    </form>
+
+</body>
+</html>

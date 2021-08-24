@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>-->
+</head>
+<body>
+<div th:replace="fragments/header :: header">...</div>
+
+<!--    <h3>In books tab</h3>-->
+
+<!--    <h1>Books Admin</h1>-->
+
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+
+<!--            <div class="col-sm-4" th:each="book : ${books}">-->
+<!--                <div class="panel panel-primary">-->
+<!--                    <div class="panel-heading" th:text="${book.name}">  </div>-->
+<!--                    <div class="panel-body">-->
+<!--&lt;!&ndash;                        <p>Description : ${product.description}  </p>&ndash;&gt;-->
+<!--                        <p>Price : <span th:text="${book.price}"></span> </p>-->
+<!--&lt;!&ndash;                        <p>Seller :  ${product.seller} </p>&ndash;&gt;-->
+<!--                    </div>-->
+<!--                    <div class="panel-footer">-->
+<!--                        <a th:href="@{/books/{id} (id=${book.id})}">-->
+<!--                        <button type="button" class="btn btn-primary btn-md">Browse</button>-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--        </div>-->
+<!--    </div><br>-->
+
+<!--    <form method="post" class="login-form" id="addBook">-->
+<!--        <div class="modal-form-group">-->
+<!--            <div class="extra"></div>-->
+<!--        </div>-->
+<!--        <div class="modal-form-group">-->
+<!--&lt;!&ndash;            <i class="input-icon material-icons" style="opacity: 1; width: auto">email</i>&ndash;&gt;-->
+<!--            <input name="bookTitle" id="bookTitle" type="text" required="required" class="modal-form-input" placeholder="Book Title">-->
+<!--        </div>-->
+<!--        <div class="modal-form-group">-->
+<!--            <input name="bookAuthor" id="bookAuthor" type="text" required="required" class="modal-form-input" placeholder="Author">-->
+<!--        </div>-->
+<!--        <div class="modal-form-group">-->
+<!--            <input name="bookPrice" id="bookPrice" type="number" required="required" class="modal-form-input" placeholder="Price">-->
+<!--        </div>-->
+<!--        <div class="modal-form-group"></div>-->
+<!--        <div class="modal-form-group"></div>-->
+<!--    </form>-->
+    <a class="btn btn-primary mb-3" th:href="@{/admin/books/add}">Add New Book</a>
+    <div class="container row">
+        <div class="col-md-6">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Book Name</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book : ${listOfBooks}">
+                    <td th:text ="${book.id}"></td>
+                    <td th:text="${book.name}"></td>
+                    <td>
+                        <a th:href="@{/admin/books/bookDetails/{id}(id=${book.id})}">
+                            <button type="button" class="btn btn-primary">Show Details</button>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            View Book Details/Add Book
+        </div>
+    </div>
+
+</body>
+</html>
