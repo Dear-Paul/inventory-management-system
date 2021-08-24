@@ -53,9 +53,9 @@ public class LoginController {
             session.setAttribute("user", user1);
             if(user1.getUserType().equals(UserType.ADMIN)){
                 System.out.println("i got here");
-                return "adminDashboard";
+                return "redirect:/admin/";
             } else {
-                return "customerDashboard";
+                return "redirect:/customer/";
             }
         } else {
             return "redirect:/";
@@ -75,5 +75,11 @@ public class LoginController {
         session.invalidate();
         return "redirect:/";
     }
+
+//    @GetMapping("/")
+//    public String homePage() {
+//        System.out.println("in home page");
+//        return "index";
+//    }
 
 }

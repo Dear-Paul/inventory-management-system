@@ -47,5 +47,52 @@
         </div>
     </nav>
 
+    <div align="center">
+        <h1>Books Admin</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4" th:each="book : ${listOfBooks}">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading" th:text="${book.name}">  </div>
+                        <div class="panel-body">
+                            <img th:src="@{${'/admin/books/display/'+book.id}}" class="img img-responsive img-fluid" height="200" width="200">
+                            <!--                        <p>Description : ${product.description}  </p>-->
+                            <p>Price : <span th:text="${book.price}"></span> </p>
+                            <!--                        <p>Seller :  ${product.seller} </p>-->
+                        </div>
+                        <div class="panel-footer">
+                            <a th:href="@{/books/{id} (id=${book.id})}">
+                                <button type="button" class="btn btn-primary btn-md">Buy</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><br>
+    </div>
+
+    <div th:if="${totalPages > 1}">
+        <div class="row col-sm-10">
+            <div class="col-sm-2">
+                Total Rows: [[${totalItems}]]
+            </div>
+            <div class="col-sm-1">
+            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+      <a th:if="${currentPage != i}" th:href="@{'/customer/page/' + ${i}}">[[${i}]]</a>
+      <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+            </span>
+            </div>
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/customer/page/' + ${currentPage + 1}}">Next</a>
+                <span th:unless="${currentPage < totalPages}">Next</span>
+            </div>
+
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/customer/page/' + ${totalPages}}">Last</a>
+                <span th:unless="${currentPage < totalPages}">Last</span>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
