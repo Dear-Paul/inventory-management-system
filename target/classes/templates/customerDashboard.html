@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer</title>
+<!--    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+<!--    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">-->
+<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+<!--    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>-->
+<!--    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+    <div class="container text-center">
+        <h1>Welcome to Java Group 2 Online Book Store</h1>
+        <p>Checkout our amazing book collection</p>
+    </div>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="nav-bar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Logo</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a> </li>
+                    <li><a href="/books/all">Books</a> </li>
+                    <li><a href="#">Deals</a> </li>
+                    <li><a href="#">Stores</a> </li>
+                    <li><a th:href="@{/logout}">Logout</a> </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>Your Account </a> </li>
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>Cart </a> </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div align="center">
+        <h1>Books Admin</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4" th:each="book : ${listOfBooks}">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading" th:text="${book.name}">  </div>
+                        <div class="panel-body">
+                            <img th:src="@{${'/admin/books/display/'+book.id}}" class="img img-responsive img-fluid" height="200" width="200">
+                            <!--                        <p>Description : ${product.description}  </p>-->
+                            <p>Price : <span th:text="${book.price}"></span> </p>
+                            <!--                        <p>Seller :  ${product.seller} </p>-->
+                        </div>
+                        <div class="panel-footer">
+                            <a th:href="@{/books/{id} (id=${book.id})}">
+                                <button type="button" class="btn btn-primary btn-md">Buy</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><br>
+    </div>
+
+    <div th:if="${totalPages > 1}">
+        <div class="row col-sm-10">
+            <div class="col-sm-2">
+                Total Rows: [[${totalItems}]]
+            </div>
+            <div class="col-sm-1">
+            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+      <a th:if="${currentPage != i}" th:href="@{'/customer/page/' + ${i}}">[[${i}]]</a>
+      <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+            </span>
+            </div>
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/customer/page/' + ${currentPage + 1}}">Next</a>
+                <span th:unless="${currentPage < totalPages}">Next</span>
+            </div>
+
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/customer/page/' + ${totalPages}}">Last</a>
+                <span th:unless="${currentPage < totalPages}">Last</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

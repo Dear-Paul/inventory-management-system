@@ -21,4 +21,16 @@ public class User {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserType userType;
+
+    public User(){
+
+    }
+
+    public User(String firstName, String lastName, String email, String password, UserType userType) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.userType = userType;
+    }
 }
