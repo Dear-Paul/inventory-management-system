@@ -2,9 +2,11 @@ package com.example.inventorymanagementsystem1.controllers;
 
 import com.example.inventorymanagementsystem1.enums.UserType;
 import com.example.inventorymanagementsystem1.model.Book;
+import com.example.inventorymanagementsystem1.model.Cart;
 import com.example.inventorymanagementsystem1.model.User;
 import com.example.inventorymanagementsystem1.services.AdminServices;
-import com.example.inventorymanagementsystem1.services.CustomerServices;
+import com.example.inventorymanagementsystem1.services.CartServices;
+import com.example.inventorymanagementsystem1.services.LoginAndRegistrationServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -12,18 +14,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
     @Autowired
-    private CustomerServices customerServices;
+    private LoginAndRegistrationServices loginAndRegistrationServices;
     @Autowired
     private AdminServices adminServices;
+    @Autowired
+    private CartServices cartServices;
 
 
     @GetMapping("/")
@@ -42,7 +44,7 @@ public class CustomerController {
         return getModelAndView(pageNo, pageSize, model, adminServices);
     }
 
-    public static ModelAndView getModelAndView(@PathVariable("pageNo") int pageNo, int pageSize, ModelAndView model, AdminServices adminServices) {
+    public ModelAndView getModelAndView(@PathVariable("pageNo") int pageNo, int pageSize, ModelAndView model, AdminServices adminServices) {
         Page<Book> page = adminServices.findPaginated(pageNo, pageSize);
         List< Book > bookList = page.getContent();
 
@@ -52,6 +54,28 @@ public class CustomerController {
         model.addObject("listOfBooks", bookList);
         System.out.println("in pagination");
         return model;
+    }
+
+    @GetMapping("/creditWallet")
+    public String creditWalletBalance(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user);
+        return "creditWalletBalance";
+    }
+
+    @PostMapping("/creditWalletBalance")
+    public String creditWallet(@ModelAttribute("user") User user) {
+        user.setUserType(UserType.CUSTOMER);
+        loginAndRegistrationServices.saveUser(user);
+        return "redirect:/cart/show";
+    }
+
+    @GetMapping("/showPurchase")
+    public String showPurchaseHistory(Model model, HttpSession session){
+        User user = (User) session.getAttribute("user");
+        List<Cart> list = cartServices.getPurchaseHistory(user.getId());
+        model.addAttribute("carts", list);
+        return "purchaseHistory";
     }
 
 }

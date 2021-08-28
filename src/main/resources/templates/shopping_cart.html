@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div><a href="#" class="navbar-brand">The Euphoria</a></div>
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Home
+                </a>
+                <!--                <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+                <!--                    <a th:href="@{/admin/users}" class="dropdown-item">Users</a>-->
+                <!--                    <a th:href="@{/admin/books}" class="dropdown-item">Books</a>-->
+                <!--                </div>-->
+            </li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a> </li>
+        </ul>
+    </nav>
+</header>
+<div>
+    <h2>Your Shopping Cart</h2>
+</div>
+
+<br/>
+<div class="row m-1">
+    <form action="#" method="post">
+
+
+        <div class="col-sm-4">
+            <th:block th:each="cart, status : ${userCart}">
+                <div class="row border rounded" th:with="book = ${cart.book}">
+                    <div class="col-1">
+                        <div>[[${status.count}]]</div>
+                        <div>
+                            <a class="fas fa-trash icon-dark" href="#"></a> Remove from Cart</div>
+                    </div>
+                    <div class="col-3">
+                        <img th:src="@{${'/admin/books/display/' }}" class="img img-responsive img-fluid" height="200" width="200">
+                    </div>
+<!--                    <div class="col-6">-->
+<!--&lt;!&ndash;                        <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <b>[[${book.name}]]</b>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--                        <div>-->
+<!--                            <input type="number" th:value="${cart.quantity}" class="form-control"/>-->
+                        </div>
+                        <div>
+<!--                            <span>X</span>-->
+<!--                            <span>$[[${book.price}]]</span>-->
+                        </div>
+                        <div>
+                            <span>=</span><span class="h4">[Subtotal]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-1">&nbsp;</div>
+            </th:block>
+        </div>
+        <!--            <p>Price : <span th:text="${cart.book}"></span> </p>-->
+        <!--            <div class="panel-heading" th:text="${cart.quantity}"> </div>-->
+        <!--        </th:block>-->
+
+        <div class="col-sm-4" th:unless="${#lists.isEmpty(userCart)}">
+            <div>
+                <span class="h3">Estimated Total:</span>
+            </div>
+            <div class="mt-2">
+                <span class="h2">[Total Amount]</span>
+            </div>
+            <button type="submit" class="btn btn-success p-3 mt-2">CheckOut</button>
+        </div>
+        <div th:if="${#lists.isEmpty(userCart)}">
+            <h3>There is no item available in cart</h3>
+
+        </div>>
+    </form>
+</div>
+</body>
+</html>

@@ -21,16 +21,19 @@ public class User {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserType userType;
+    @Column(columnDefinition = "double precision default 0")
+    private double walletBalance;
 
     public User(){
 
     }
 
-    public User(String firstName, String lastName, String email, String password, UserType userType) {
+    public User(String firstName, String lastName, String email, String password, UserType userType, double walletBalance) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.userType = userType;
+        this.walletBalance = walletBalance;
     }
 }

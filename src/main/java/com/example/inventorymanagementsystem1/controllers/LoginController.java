@@ -3,6 +3,7 @@ package com.example.inventorymanagementsystem1.controllers;
 import com.example.inventorymanagementsystem1.dto.UserDto;
 import com.example.inventorymanagementsystem1.enums.UserType;
 import com.example.inventorymanagementsystem1.model.Book;
+import com.example.inventorymanagementsystem1.model.Cart;
 import com.example.inventorymanagementsystem1.model.User;
 import com.example.inventorymanagementsystem1.repositories.BookRepository;
 import com.example.inventorymanagementsystem1.services.CustomerServices;
@@ -50,11 +51,19 @@ public class LoginController {
         Optional<User> optionalUser = loginAndRegistrationServices.login(userDto.getEmail(), userDto.getPassword());
         if(optionalUser.isPresent()){
             User user1 = optionalUser.get();
+            Cart cart = new Cart();
+            cart.setBookList(null);
+            session.setAttribute("cart", cart);
             session.setAttribute("user", user1);
             if(user1.getUserType().equals(UserType.ADMIN)){
                 System.out.println("i got here");
                 return "redirect:/admin/";
             } else {
+//                Cart cart = new Cart();
+//                List<Book> bookList = new ArrayList<>();
+//                cart.setUser(user1);
+//                cart.setBook(bookList);
+//                session.setAttribute("cart", cart);
                 return "redirect:/customer/";
             }
         } else {

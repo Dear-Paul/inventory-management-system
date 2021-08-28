@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center-card">
+        <h1 class="text-center">Credit Wallet</h1>
+        <div class="card-body">
+            <form th:action="@{/customer/creditWalletBalance}" th:object ="${user}" method="POST">
+                <input type="hidden" name="id"
+                       th:field = "*{id}"
+                       class="form-control"
+                       placeholder="Enter first name"/>
+                <div class="form-group">
+
+                    <input type="hidden" name="firstName"
+                           th:field = "*{firstName}"
+                           class="form-control"
+                           placeholder="Enter first name"/>
+                </div>
+                <!--                        <input type="hidden" th:field="*{usertype.CUSTOMER.toString()}">-->
+                <div class="form-group">
+                    <label>LastName</label>
+                    <input type="hidden" name="lastName"
+                           th:field = "*{lastName}"
+                           class="form-control"
+                           placeholder="Enter last name"/>
+                </div>
+
+                <div class="form-group">
+                    <label>Employee Email</label>
+                    <input type="hidden"  name="email"
+                           th:field = "*{email}" class="form-control"  placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label>Wallet</label>
+                    <input type="number"  name="email"
+                           th:field = "*{walletBalance}" class="form-control"  placeholder="Set Wallet Balance">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="hidden" name="password"
+                           th:field = "*{password}"  class="form-control" placeholder="Input a password" hidden/>
+                </div>
+
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Credit </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,11 +1,11 @@
 package com.example.inventorymanagementsystem1.controllers;
 
+import com.example.inventorymanagementsystem1.enums.UserType;
 import com.example.inventorymanagementsystem1.model.Book;
-<<<<<<< HEAD
+import com.example.inventorymanagementsystem1.model.Cart;
 import com.example.inventorymanagementsystem1.model.User;
-=======
->>>>>>> de63233dd7441924e8d48d60d6eddd4f8ee434cb
 import com.example.inventorymanagementsystem1.services.AdminServices;
+import com.example.inventorymanagementsystem1.services.CartServices;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -37,6 +38,8 @@ public class AdminController {
 
     @Autowired
     private AdminServices adminServices;
+    @Autowired
+    private CartServices cartServices;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -51,7 +54,19 @@ public class AdminController {
         int pageSize = 6;
         ModelAndView model = new ModelAndView("adminDashboard");
 
-        return CustomerController.getModelAndView(pageNo, pageSize, model, adminServices);
+        return getModelAndView(pageNo, pageSize, model, adminServices);
+    }
+
+    public ModelAndView getModelAndView(@PathVariable("pageNo") int pageNo, int pageSize, ModelAndView model, AdminServices adminServices) {
+        Page<Book> page = adminServices.findPaginated(pageNo, pageSize);
+        List< Book > bookList = page.getContent();
+
+        model.addObject("currentPage", pageNo);
+        model.addObject("totalPages", page.getTotalPages());
+        model.addObject("totalItems", page.getTotalElements());
+        model.addObject("listOfBooks", bookList);
+        System.out.println("in pagination");
+        return model;
     }
 
     @GetMapping("/books")
@@ -66,21 +81,6 @@ public class AdminController {
         model.addAttribute("book", new Book());
         return "adminAddNewBook";
     }
-
-//    @PostMapping("/books/upload")
-//    public void uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
-//        this.bytes = file.getBytes();
-//    }
-
-//    @PostMapping("/books/add")
-//    public String createBook(@RequestParam ("image") MultipartFile multipartFile, Book book) throws IOException {
-//        String filename = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-//        book.setPicByte(filename);
-//        Book book1 = adminServices.addBookToStore(book);
-//        String uploadDir = "book-image" + book1.getId();
-//        adminServices.saveFile(uploadDir, filename, multipartFile);
-//        return "redirect:/admin/books";
-//    }
 
     @PostMapping("/books/add")
     public @ResponseBody ResponseEntity<?> createBook(Book book, Model model, HttpServletRequest request
@@ -181,12 +181,12 @@ public class AdminController {
         adminServices.removeBookFromStore(id);
         return "redirect:/admin/books";
     }
-<<<<<<< HEAD
 
-    @GetMapping("/admin/users")
-    public ModelAndView viewAllUsers(Model model){
+
+    @GetMapping("/users")
+    public ModelAndView viewAllUsers(){
         ModelAndView modelAndView = new ModelAndView("userInfo");
-        List<User> listOfUsers = adminServices.getAllUsers();
+        List<User> listOfUsers = adminServices.getUsersByUserRole(UserType.CUSTOMER);
         modelAndView.addObject("listOfUsers", listOfUsers);
         return modelAndView;
     }
@@ -197,7 +197,11 @@ public class AdminController {
         return "redirect:/admin/user";
     }
 
+    @GetMapping("/showPurchase/{id}")
+    public String showPurchaseHistory(@PathVariable(value = "id") long id, Model model, HttpSession session){
+        List<Cart> list = cartServices.getPurchaseHistory(id);
+        model.addAttribute("carts", list);
+        return "adminViewUserPurchaseHistory";
+    }
 
-=======
->>>>>>> de63233dd7441924e8d48d60d6eddd4f8ee434cb
 }

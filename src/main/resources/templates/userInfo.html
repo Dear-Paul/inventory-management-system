@@ -31,7 +31,11 @@
                     <td th:text="${user.email}">email</td>
                     <td th:text="${user.password}">password</td>
                     <td th:text="${user.userType}">UserType</td>
-                    <td><button type="submit" class="btn btn-info col-2"> Delete User</button></td>
+                    <td>
+                        <a th:href="@{/admin/showPurchase/{id} (id=${user.id})}">
+                            <button type="submit" class="btn btn-info col-2"> Show User Purchase History</button>
+                        </a>
+                    </td>
             </tr>
             </tbody>
         </table>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+<a class="btn btn-primary mb-3" th:href="@{/customer/}">Back To Dashboard</a>
+<table border="1" class = "table table-striped table-responsive-md">
+    <thead>
+    <tr>
+        <th>Book Amount</th>
+        <th>Time Purchased</th>
+        <th>Book Name</th>
+<!--        <th style="text-align: center; font-size: xxx-large">Action</th>-->
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="cart:${carts}">
+        <td th:text="*{cart.amount}"></td>
+        <td th:text="${cart.dateTimePurchased}"></td>
+        <td>
+            <ul th:each="book : ${cart.getBookList()}">
+                <li th:text="${book.getName()}"></li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
