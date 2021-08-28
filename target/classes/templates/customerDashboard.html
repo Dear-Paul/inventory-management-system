@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">-->
 </head>
 <body>
 
@@ -40,9 +42,30 @@
                     <li><a th:href="@{/logout}">Logout</a> </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>Your Account </a> </li>
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>Cart </a> </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>
+                            Account
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a th:href="@{/customer/showPurchase}" class="dropdown-item">Purchase History</a>
+                        </div>
+                    </li>
+<!--                        <a th:href="@{/customer/showPurchase}"><span class="glyphicon glyphicon-user"></span>Account </a> </li>-->
+                    <li><a th:href="@{/cart/show}"><span class="glyphicon glyphicon-user"></span>Cart </a> </li>
                 </ul>
+
+<!--                <li class="nav-item dropdown">-->
+<!--&lt;!&ndash;                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"&ndash;&gt;-->
+<!--&lt;!&ndash;                       aria-haspopup="true" aria-expanded="false">&ndash;&gt;-->
+<!--&lt;!&ndash;                        Admin&ndash;&gt;-->
+<!--&lt;!&ndash;                    </a>&ndash;&gt;-->
+<!--                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--                        <a th:href="@{/admin/users}" class="dropdown-item">Users</a>-->
+<!--                        <a th:href="@{/admin/books}" class="dropdown-item">Books</a>-->
+<!--                    </div>-->
+<!--                </li>-->
+
             </div>
         </div>
     </nav>
@@ -61,8 +84,8 @@
                             <!--                        <p>Seller :  ${product.seller} </p>-->
                         </div>
                         <div class="panel-footer">
-                            <a th:href="@{/books/{id} (id=${book.id})}">
-                                <button type="button" class="btn btn-primary btn-md">Buy</button>
+                            <a th:href="@{/cart/addToCart/{id} (id=${book.id})}">
+                                <button type="button" class="btn btn-primary btn-md">Add To Cart</button>
                             </a>
                         </div>
                     </div>
